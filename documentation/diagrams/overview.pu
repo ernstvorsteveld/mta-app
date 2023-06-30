@@ -1,0 +1,18 @@
+@startuml "overview.svg"
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+Person("i2e", "Invoice to Expense", "Invoice-to-expense user connects the invoice to an expense")
+
+System_Boundary(c1, "go backend"){
+    Container("ac", "Invoice to Expense Container", "go", "Invoice to expense container")
+}
+
+System_Boundary(c2, "IAM"){
+    Container("kc", "Keycloak", "go", "Invoice to expense container")
+}
+
+Rel_D(i2e, kc, "uses", "HTTPS")
+Rel_D(i2e, ac, "uses", "HTTPS")
+
+@enduml
